@@ -18,7 +18,7 @@ import com.zengp.demo.model.DyUser;
  */
 public class DyUtils {
 	// 短链转长链，目的是将短链解析出来拿到sec_uid，可自行优化
-	private static String shortchainUrl = "https://duanwangzhihuanyuan.51240.com/web_system/51240_com_www/system/file/duanwangzhihuanyuan/get/";
+	private static String shortchainUrl = "https://duanwangzhihuanyuan.bmcx.com/web_system/bmcx_com_www/system/file/duanwangzhihuanyuan/get/";
 	// 抖音官方接口(未开放)
 	private static String dyUrl = "https://www.iesdouyin.com/web/api/v2/user/info/";
 	
