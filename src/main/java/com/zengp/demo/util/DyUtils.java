@@ -7,6 +7,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.zengp.demo.constant.CommConstants;
 import com.zengp.demo.model.DyUser;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 获取抖音粉丝等相关信息(不走官方授权)
  * 此工具类可直接使用，也可根据其逻辑自行优化
@@ -67,18 +73,20 @@ public class DyUtils {
 	}
 
 	/**
-	 *  纯净化抖音主页分享链接
+	 * 纯净化抖音主页分享链接
 	 * 保险起见建议还是让用户自行去掉中文
+	 * 彻底解决提取链接地址的问题
 	 * @param link
 	 * @return
 	 */
 	private static String clearDyHomeLink (String link) {
-		String result = "";
-		// 这里可以优化
-		result = link.replaceAll(CommConstants.REGEX_CHINESE, "");
-		result = result.replaceAll(CommConstants.REGEX_COMMA, "");
-		result = result.replaceAll(CommConstants.REGEX_EXCLAMATORY_MARK, "");
-		result = result.trim();
-		return result;
+		Pattern pattern = Pattern.compile("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
+		Matcher matcher = pattern.matcher(link);
+		List<String> urlArr = new ArrayList<>();
+		while (matcher.find()) {
+			urlArr.add(matcher.group());
+		}
+		return urlArr.get(0);
 	}
+
 }
